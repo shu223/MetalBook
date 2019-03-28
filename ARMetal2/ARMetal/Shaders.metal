@@ -13,7 +13,7 @@ using namespace metal;
 struct ColorInOut
 {
     float4 position [[ position ]];
-    float2 texCoords;
+    float2 texcoord;
 };
 
 vertex ColorInOut vertexShader(const device float4* positions [[ buffer(0) ]],
@@ -22,7 +22,7 @@ vertex ColorInOut vertexShader(const device float4* positions [[ buffer(0) ]],
 {
     ColorInOut out;
     out.position = positions[vid];
-    out.texCoords = texCoords[vid];
+    out.texcoord = texCoords[vid];
     return out;
 }
 
@@ -34,11 +34,11 @@ fragment float4 fragmentShader(ColorInOut       in               [[ stage_in ]],
 {
     constexpr sampler colorSampler;
 
-    float4 color = snapshot_texture.sample(colorSampler, in.texCoords);
+    float4 color = snapshot_texture.sample(colorSampler, in.texcoord);
     
     if (color.r == 0.0 && color.g == 0.0 && color.b == 0.0)
     {
-        float2 uv = in.texCoords;
+        float2 uv = in.texcoord;
         float duration = 2;
         float x_offset = sin(uv.y * 20.0 + time) / duration;
         x_offset *= 0.1;
