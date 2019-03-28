@@ -13,8 +13,8 @@ using namespace metal;
 #include <SceneKit/scn_metal>
 
 struct VertexInput {
-    float3 position  [[attribute(SCNVertexSemanticPosition)]];
-    float2 texCoords [[attribute(SCNVertexSemanticTexcoord0)]];
+    float3 position [[attribute(SCNVertexSemanticPosition)]];
+    float2 texcoord [[attribute(SCNVertexSemanticTexcoord0)]];
 };
 
 struct NodeBuffer {
@@ -24,7 +24,7 @@ struct NodeBuffer {
 struct ColorInOut
 {
     float4 position [[ position ]];
-    float2 texCoords;
+    float2 texcoord;
 };
 
 vertex ColorInOut vertexShader(VertexInput          in       [[ stage_in ]],
@@ -32,7 +32,7 @@ vertex ColorInOut vertexShader(VertexInput          in       [[ stage_in ]],
 {
     ColorInOut out;
     out.position = scn_node.modelViewProjectionTransform * float4(in.position, 1.0);
-    out.texCoords = in.texCoords;
+    out.texcoord = in.texcoord;
     
     return out;
 }
@@ -40,7 +40,7 @@ vertex ColorInOut vertexShader(VertexInput          in       [[ stage_in ]],
 fragment half4 fragmentShader(ColorInOut in          [[ stage_in] ],
                               constant   float& time [[ buffer(0) ]])
 {
-    float2 uv = in.texCoords * 4;
+    float2 uv = in.texcoord * 4;
     
     float i0=1.2;
     float i1=0.95;
