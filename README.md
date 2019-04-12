@@ -6,7 +6,7 @@
 
 iOS/macOSのGPUインターフェース、Metalの入門書です。 GPUを操って高度なグラフィックス処理や大規模な並列演算を行うことにはロマンがありますが、OpenGLやDirectXといった他の低レベルグラフィックスAPIを扱った経験がない開発者にとって、Metalは**一歩目のハードルが一番高い**のではないかと思います。筆者もそんなGPUプログラミング初心者のひとりで、四苦八苦しながら最初の一歩目を乗り越えました。 本書では、そんな「非」熟練者である筆者だからこその視点から、Metalをかみくだいて解説します。
 
-全128ページ。iOS 12.0, Xcode 10.0, Swift 4.2対応。
+全136ページ。iOS 12.0, Xcode 10.0, Swift 5対応。
 
 ## 書籍の目次
 
@@ -95,13 +95,13 @@ iOS/macOSのGPUインターフェース、Metalの入門書です。 GPUを操�
 
 13 章 SceneKit × Metal
 
-- 13.1 Metal で SceneKit のマテリアルを描画する
+- 13.1 MetalでSceneKitのマテリアルを描画する
 - 13.2 他のSceneKitとMetalの連携機能
 
 14章 ARKit × Metal
 
 - 14.1 マテリアルをMetalで描画する
-- 14.2 MetalによるARKitのカスタムレンダリング
+- 14.2 Metalによるカスタムレンダリング
 
 15章 Core Video × Metal
 
