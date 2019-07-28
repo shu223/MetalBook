@@ -21,14 +21,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var metalView: MetalRenderView!
     
     private var planeNode: SCNNode?
+    private var duckNode: SCNNode!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sceneView.delegate = self
+        duckNode = SCNNode.duckNode()
+        
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         sceneView.scene = SCNScene()
-        
+        sceneView.delegate = self
+
         label.text = "Wait..."
         
         startRunning()
@@ -85,17 +88,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("\(self.classForCoder)/" + #function)
         
-        let virtualNode = VirtualObjectNode()
         // 黒で塗る
-        for child in virtualNode.childNodes {
+        for child in duckNode.childNodes {
             if let material = child.geometry?.firstMaterial {
                 material.diffuse.contents = UIColor.black
             }
         }
-        virtualNode.scale = SCNVector3Make(2, 2, 2)
+        duckNode.scale = SCNVector3Make(2, 2, 2)
         
         DispatchQueue.main.async(execute: {
-            node.addChildNode(virtualNode)
+            node.addChildNode(self.duckNode)
         })
     }
     
@@ -121,27 +123,3 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         startRunning()
     }
 }
-
-extension SCNNode {
-    
-    func loadDuck() {
-        guard let scene = SCNScene(named: "duck.scn", inDirectory: "models.scnassets/duck") else {fatalError()}
-        for child in scene.rootNode.childNodes {
-            child.geometry?.firstMaterial?.lightingModel = .physicallyBased
-            addChildNode(child)
-        }
-    }
-}
-
-class VirtualObjectNode: SCNNode {
-    
-    override init() {
-        super.init()
-        loadDuck()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-

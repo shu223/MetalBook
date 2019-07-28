@@ -27,7 +27,7 @@ extension SCNNode {
     
     class func textNode(text: String) -> SCNNode {
         let geometry = SCNText(string: text, extrusionDepth: 0.01)
-        geometry.alignmentMode = kCAAlignmentCenter
+        geometry.alignmentMode = CATextLayerAlignmentMode.center.rawValue
         if let material = geometry.firstMaterial {
             material.diffuse.contents = UIColor.white
             material.isDoubleSided = true
@@ -50,6 +50,20 @@ extension SCNNode {
 
         node.addChildNode(textNode)
         
+        return node
+    }
+}
+
+extension SCNNode {
+    
+    class func duckNode() -> SCNNode {
+        let node = SCNNode()
+        guard let scene = SCNScene(named: "duck.scn", inDirectory: "models.scnassets/duck") else {fatalError()}
+        print("duck scene:\(scene)")
+        for child in scene.rootNode.childNodes {
+            child.geometry?.firstMaterial?.lightingModel = .physicallyBased
+            node.addChildNode(child)
+        }
         return node
     }
 }
