@@ -28,6 +28,7 @@ class ViewController: UIViewController, MTKViewDelegate {
 
         //
         mtkView.enableSetNeedsDisplay = true
+        mtkView.framebufferOnly = false
 
         // ビューの更新依頼 → draw(in:)が呼ばれる
         mtkView.setNeedsDisplay()
