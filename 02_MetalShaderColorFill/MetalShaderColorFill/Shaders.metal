@@ -15,7 +15,7 @@ struct ColorInOut
 };
 
 vertex ColorInOut vertexShader(constant float4 *positions [[ buffer(0) ]],
-                               uint           vid       [[ vertex_id ]])
+                                        uint    vid       [[ vertex_id ]])
 {
     ColorInOut out;
     out.position = positions[vid];
