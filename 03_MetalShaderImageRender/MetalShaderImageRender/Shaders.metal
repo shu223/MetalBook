@@ -15,8 +15,8 @@ struct ColorInOut
     float2 texCoords;
 };
 
-vertex ColorInOut vertexShader(device float4 *positions [[ buffer(0) ]],
-                               device float2 *texCoords [[ buffer(1) ]],
+vertex ColorInOut vertexShader(constant float4 *positions [[ buffer(0) ]],
+                               constant float2 *texCoords [[ buffer(1) ]],
                                uint           vid       [[ vertex_id ]])
 {
     ColorInOut out;
